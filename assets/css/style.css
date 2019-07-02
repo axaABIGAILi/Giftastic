@@ -1,7 +1,53 @@
+@import url('https://fonts.googleapis.com/css?family=Creepster&display=swap');
+
+body {
+    background-image: url('../images/black_scales.png');
+    font-family: sans-serif;
+}
+
+#header-div {
+    text-align: center;
+    margin: 10px;
+    background-color: black;
+}
+
+#add {
+    background-color: black;
+    color: #999;
+    text-align: center;
+}
+
+button {
+    background-color: #A00F0F;
+    font-size: 16px;
+    border: 1px solid black;
+    margin: 5px;
+}
+
+header, h2 {
+    font-family: 'Creepster', cursive;
+    color: #A00F0F;
+}
+
+h1 {
+    font-size: 48px;
+    margin: 0;
+}
+
+h2 {
+    margin: 0;
+}
+
 #gif {
     float: left;
 }
 
 #add {
     float: right;
+}
+
+.gif-display {
+    margin: 10px;
+    background-color: black;
+    color: #999;
 }

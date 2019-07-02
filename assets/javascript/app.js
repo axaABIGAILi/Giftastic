@@ -55,6 +55,7 @@ function monGif () {
         var gifRate = response.data[j].rating;
         var gifDiv = $('<div>');
         $(gifDiv).html('<br>Rating: ' +gifRate);
+        $(gifDiv).addClass('gif-display');
         var gifDisplay = $('<img>');
         // append the url from the API into the image tag
         gifDisplay.addClass('gif');
