@@ -2,8 +2,7 @@
 $(document).ready(function() {
 
 // create array for buttons
-var monsArray = ['Godzilla', 'Dracula', 'Mothra'];
-console.log(monsArray);
+var monsArray = ['Godzilla','Dracula', 'Mothra'];
 
 for ( var i = 0; i < monsArray.length; i++) {
     var monBtn = $('<button>');
@@ -39,7 +38,7 @@ function monGif () {
     bID = $(this).attr('id');
     console.log(bID);
     // plug bID into the queryURL
-    queryURL = 'https://api.giphy.com/v1/gifs/search?q='+bID+'&api_key=Amn3QQghpSgmxrd4ayGLZt5GGXEFQAv7'
+    queryURL = 'https://api.giphy.com/v1/gifs/search?q='+bID+'&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10'
     console.log(queryURL);
 
     // make the API call to GIPHY w/ clicked URL
@@ -49,25 +48,49 @@ function monGif () {
     })
     // create function that executes after the call being made - in this case populating the gifs div with 5 recieved gifs
     .then (function(response) {
-        console.log(response);
-        console.log(response.data[0].images);
+        // make a loop to return 10 images
+        for ( j = 0; j < 10; j++) {
         // define variables of the URL and 
-        var gifURL = response.data[0].images.fixed_width.url;
-        var gifRate = response.data[0].rating;
+        var gifURL = response.data[j].images.fixed_width.url;
+        var gifRate = response.data[j].rating;
         var gifDiv = $('<div>');
         $(gifDiv).html('<br>Rating: ' +gifRate);
         var gifDisplay = $('<img>');
         // append the url from the API into the image tag
-        gifDisplay.attr('src', gifURL);
+        gifDisplay.addClass('gif');
+        gifDisplay.attr('src', response.data[j].images.fixed_width_still.url);
+        gifDisplay.attr('data-still',response.data[j].images.fixed_width_still.url);
+        gifDisplay.attr('data-animated', gifURL);
+        gifDisplay.attr('data-state', 'still')
         // prepend the recieved gif to gifs div
         $(gifDiv).prepend(gifDisplay);
         $('#gif').prepend(gifDiv);
+        }
     });
 
 }
 
 // create the onclick event and correlate it to monster buttons
-$('.mon-button').on('click', monGif);
+$(document).on('click', '.mon-button', monGif);
+
+// create function to play and pause gifs
+function gifPause () {
+    var state = $(this).attr('data-state');
+    console.log(state);
+    var animated = $(this).attr('data-animated');
+    var still = $(this).attr('data-still');
+  
+
+    if (state === 'still') {
+      $(this).attr('src', animated);
+      $(this).attr('data-state', 'animated');
+    } else {
+      $(this).attr('src', still);
+      $(this).attr('data-state', 'still')
+    }
+}
+
+$(document).on('click', '.gif', gifPause);
 
 
 // closing doc.ready
