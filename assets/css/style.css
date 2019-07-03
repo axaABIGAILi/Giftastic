@@ -40,14 +40,18 @@ h2 {
 
 #gif {
     float: left;
+    width: 70%;
+    border: 1px solid #A00F0F;
 }
 
 #add {
     float: right;
+    width: 20%;
 }
 
 .gif-display {
     margin: 10px;
     background-color: black;
     color: #999;
+    display: inline-block;
 }
